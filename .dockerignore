@@ -1,7 +1,0 @@
-# build
-[Oo]bj/
-[Bb]in/
-
-# globs
-*.DS_Store
-.git
