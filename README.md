@@ -22,48 +22,7 @@ Currently, only the the ```GET``` verb is supported. In the future, I plan to ad
 
 The instructions below are for a MacBook. Modify as needed if you're using Linux or Windows.
 
-### Step 1: Run SQL Server 2017 in Docker
 
-- Download and install Docker for your operating system: <https://www.docker.com>
-- Increase Docker memory to 4 GB to run SQL Server 2017 as documented [here](https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker#requirements)
-
-Copy & paste the commands below in a ```Terminal``` window to run SQL Server 2017 in Docker.
-
-```
-docker pull microsoft/mssql-server-linux:2017-GA
-
-docker run --cap-add SYS_PTRACE \
-           -e 'ACCEPT_EULA=Y' \
-           -e 'MSSQL_SA_PASSWORD=Yukon900' \
-           -e 'MSSQL_PID=Developer' \
-           -p 1433:1433 \
-           -d microsoft/mssql-server-linux:2017-GA
-```
-
-### Step 2: Run the REST API web app in Docker
-
-This REST API web app is available on Docker hub: <https://hub.docker.com/r/sanagama/mssql-restapi>
-
-Copy & paste the commands below in a ```Terminal``` window to run the REST API web app in Docker and connect to SQL Server 2017 running locally in Docker.
-
-```
-docker pull sanagama/mssql-restapi
-
-docker run -it -p 5000:5000 -e MSSQL_HOST=`hostname -s` sanagama/mssql-restapi
-```
-
->*NOTE:* With the above command, the REST API web app uses default values for *port*, *database*, *username* and *password* as described in [environment variables](#environment-variables)
-
-### Step 3: Play with the REST API
-
-> *TIP:* [Google Chrome](https://www.google.com/chrome/) with the [JSON Formatter](https://github.com/callumlocke/json-formatter) extension is a great way to play with REST APIs.
-
-- Launch your browser and navigate to <http://localhost:5000/api/mssql>
-- Click on the various links in the JSON response to navigate databases, tables, columns and table data in the SQL instance and generate scripts.
-
-> That's it, all done!
-
-> Keep reading if you want to get the source code and walk through a more advanced example with the AdventureWorks and WideWorldImporters SQL Server sample databases.
 
 ## Run locally with .NET Core
 
@@ -134,14 +93,7 @@ You can connect to Azure SQL Database or Azure SQL Data Warehouse by passing you
 
 >*TIP:* Change **\<server\>**, **\<username\>** and **\<password\>** in the example below as appropriate to connect to your Azure SQL Database or Azure SQL Data Warehouse.
 
-Type the following commands in the ```Terminal``` window to run the REST API web app in Docker:
-```
-docker run -it -p 5000:5000 \
-           -e MSSQL_HOST="<server>.database.windows.net" \
-           -e MSSQL_PORT="1433" \
-           -e MSSQL_USERNAME="<username>" \
-           -e MSSQL_PASSWORD="<password>" \
-           sanagama/mssql-restapi
+
 ```
 
 Type the following commands in the ```Terminal``` window to run the REST API web app locally with .NET Core:
